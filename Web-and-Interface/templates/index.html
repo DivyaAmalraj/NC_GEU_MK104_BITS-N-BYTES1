@@ -6,23 +6,27 @@
 
 {% block styles %}
     {{ super() }}
+
     
     <!-- Custom styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-    <h1>{{ TITLE }}</h1>
+    <h1 class="center">{{ TITLE }} <i class="fa fa-cogs" aria-hidden="true"></i> </h1>
+    <h3 class= "center">Team : Bits'N'Bytes</h3>
 
     <div id="container">
         <img id="videoElement" src="{{ url_for('video_feed') }}">
-        <form id="control">
+        <form id="control" class="center">
             Camera preview:
-            <a id="cam-preview"><button class="btn btn-default">On/Off</button></a>
+            <a id="cam-preview"><button class="btn btn-default">On/Off</button></a> <br> <br>
             Run detection model:
-            <a id="use-model"><button class="btn btn-default">On/Off</button></a>
-            <br> <br>
-            <a id="reset-cam"><button class="btn btn-default">Reset camera</button></a>
+            <a id="use-model"><button class="btn btn-default">On/Off</button></a> <br>
+            <br> 
+            <a id="reset-cam"><button class="btn btn-default center">Reset camera</button></a>
         </form>
     </div>
 {% endblock %}
@@ -36,3 +40,4 @@
 
     {{ super() }}
 {% endblock %}
+    

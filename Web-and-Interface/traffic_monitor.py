@@ -1,6 +1,23 @@
 import time
 import cv2
 import numpy as np
+import pyrebase
+
+
+config = {
+    "apiKey": "AIzaSyAsCfnlHvnWvk5Bc8qVqOx8VxiLDrcC3qE",
+    "authDomain": "sih2020-f42e4.firebaseapp.com",
+    "databaseURL": "https://sih2020-f42e4.firebaseio.com",
+    "projectId": "sih2020-f42e4",
+    "storageBucket": "sih2020-f42e4.appspot.com",
+    "messagingSenderId": "617151626524",
+    "appId": "1:617151626524:web:41dfb05cd3756b3c1bced9",
+    "measurementId": "G-WTDCBGZQ7L"
+}
+
+firebase = pyrebase.initialize_app(config)
+
+db = firebase.database()
 
 class Objectdata:
     def __init__(self):
@@ -18,6 +35,7 @@ class Objectdata:
     def detectObj(self, frame):
         width = 320
         count = 0
+        flag = False
         ht, wt, ch = frame.shape
         blob = cv2.dnn.blobFromImage(frame, 1/255, (width, width), (0,0,0), 1, crop=False)
         self.network.setInput(blob)
@@ -50,6 +68,8 @@ class Objectdata:
                     print(count)
                 if(count>10):
                     cv2.putText(frame,'Traffic Occured',(500,500),cv2.FONT_HERSHEY_SIMPLEX,5, (0, 0, 255), 2)
+                    flag = True
+                    db.update({"alert":flag})
         return frame
 
 

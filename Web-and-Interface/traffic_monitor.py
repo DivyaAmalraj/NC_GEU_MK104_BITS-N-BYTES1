@@ -41,11 +41,15 @@ class Objectdata:
         font = cv2.FONT_HERSHEY_PLAIN
         for i in range(len(boxes)):
             if i in indices:
-                box = boxes[i]
+                x, y, w, h = boxes[i]
                 onames = str(self.ClassName[classIds[i]])
-                x, y, w, h = box[0], box[1], box[2], box[3]
                 cv2.rectangle(frame, (x, y), (x+w,y+h), (255, 0 , 255), 2)
-                cv2.putText(frame,f'{int(confidences[i]*100)}%',(x, y-8), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 255), 2)
+                cv2.putText(frame,f'{onames} {int(confidences[i]*100)}%',(x, y-8), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 255), 2)
+                if (onames=='car'):
+                    count+=1
+                    print(count)
+                if(count>10):
+                    cv2.putText(frame,'Traffic Occured',(500,500),cv2.FONT_HERSHEY_SIMPLEX,5, (0, 0, 255), 2)
         return frame
 
 

@@ -27,4 +27,11 @@
 
     <!--title and Description-->
     <string name="search_txt">Search...</string>
+    <string name="featured_locations">All Featured Location</string>
+    <string name="featured_location_description">All the location that are featured and have the top demand in town!</string>
+    <string name="most_viewed_locations">Most Viewed</string>
+    <string name="categories">Categories</string>
+    <string name="view_all">View All</string>
+
+
 </resources>

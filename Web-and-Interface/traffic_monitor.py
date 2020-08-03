@@ -4,6 +4,7 @@ import numpy as np
 import pyrebase
 
 
+
 config = {
     "apiKey": "AIzaSyAsCfnlHvnWvk5Bc8qVqOx8VxiLDrcC3qE",
     "authDomain": "sih2020-f42e4.firebaseapp.com",
@@ -18,6 +19,8 @@ config = {
 firebase = pyrebase.initialize_app(config)
 
 db = firebase.database()
+
+
 
 class Objectdata:
     def __init__(self):
@@ -34,8 +37,8 @@ class Objectdata:
         
     def detectObj(self, frame):
         width = 320
-        count = 0
         flag = False
+        count = 0
         ht, wt, ch = frame.shape
         blob = cv2.dnn.blobFromImage(frame, 1/255, (width, width), (0,0,0), 1, crop=False)
         self.network.setInput(blob)
@@ -99,23 +102,8 @@ class VideoStreaming(object):
     def detect(self, value):
         self._detect = bool(value)
     
-    @property
-    def exposure(self):
-        return self._exposure
 
-    @exposure.setter
-    def exposure(self, value):
-        self._exposure = value
-        self.VIDEO.set(cv2.CAP_PROP_EXPOSURE, self._exposure)
-    
-    @property
-    def contrast(self):
-        return self._contrast
 
-    @contrast.setter
-    def contrast(self, value):
-        self._contrast = value
-        self.VIDEO.set(cv2.CAP_PROP_CONTRAST, self._contrast)
 
     def show(self):
         while(self.VIDEO.isOpened()):
